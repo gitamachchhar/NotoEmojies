@@ -1,4 +1,4 @@
-# NotoEmojies
+# NotoEmojis
 
 
 Emoji keyboard using Noto Color Emoji font.
