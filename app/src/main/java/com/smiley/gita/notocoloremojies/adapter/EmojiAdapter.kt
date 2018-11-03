@@ -13,35 +13,35 @@ import kotlinx.android.synthetic.main.emoji_holder.view.*
 class EmojiAdapter(val items: ArrayList<String>?, val context: FragmentActivity?) :ListAdapter {
 
     override fun isEmpty(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+      return false
     }
 
     override fun registerDataSetObserver(observer: DataSetObserver?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun getItemViewType(position: Int): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       return position;
     }
 
     override fun getViewTypeCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       return 1;
     }
 
     override fun isEnabled(position: Int): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       return true
     }
 
     override fun hasStableIds(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return true
     }
 
     override fun areAllItemsEnabled(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return true
     }
 
     override fun unregisterDataSetObserver(observer: DataSetObserver?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun getCount(): Int {
@@ -50,7 +50,7 @@ class EmojiAdapter(val items: ArrayList<String>?, val context: FragmentActivity?
 
 
     override fun getItemId(position: Int): Long {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return position.toLong()
     }
 
 

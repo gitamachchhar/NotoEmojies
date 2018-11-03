@@ -11,7 +11,7 @@ import android.widget.GridView
 import com.smiley.gita.notocoloremojies.R
 import com.smiley.gita.notocoloremojies.adapter.EmojiAdapter
 
-class EmojiFragment: Fragment() {
+class EmojiFragment : Fragment() {
 
     var emojiList: ArrayList<String>? = null
 
@@ -23,9 +23,8 @@ class EmojiFragment: Fragment() {
         emojiList = args?.getStringArrayList("data")
 
         val gridView = view.findViewById<GridView>(R.id.grid_emoji)
-
+        gridView.setPadding(-5, 0, -5, 0);
         gridView.adapter = EmojiAdapter(emojiList, activity)
-
 
         gridView.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
 
@@ -35,14 +34,12 @@ class EmojiFragment: Fragment() {
 
         return view
     }
-
-    companion object {
-        fun newInstance(emoji: ArrayList<String>): EmojiFragment {
-            val args = Bundle()
-            args.putStringArrayList("data", emoji)
-            val fragment = EmojiFragment()
-            fragment.arguments = args
-            return fragment
-        }
+    fun newInstance(emoji: ArrayList<String>): EmojiFragment {
+        val args = Bundle()
+        args.putStringArrayList("data", emoji)
+        val fragment = EmojiFragment()
+        fragment.arguments = args
+        return fragment
     }
+
 }
