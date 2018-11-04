@@ -1,23 +1,27 @@
 package com.smiley.gita.notocoloremojies
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.text.emoji.EmojiCompat
 import android.support.text.emoji.FontRequestEmojiCompatConfig
 import android.support.text.emoji.bundled.BundledEmojiCompatConfig
+import android.support.text.emoji.widget.EmojiAppCompatEditText
+import android.support.text.emoji.widget.EmojiAppCompatTextView
 import android.support.v4.provider.FontRequest
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.TextView
 import com.smiley.gita.notocoloremojies.adapter.EmojiPagerAdapter
 import com.smiley.gita.notocoloremojies.emojies.*
 import com.smiley.gita.notocoloremojies.fragments.EmojiFragment
-import java.lang.ref.WeakReference
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), EmojiFragment.OnEmojiconClickedListener {
 
     val USE_BUNDLED_EMOJI = true
     var fragmentList: ArrayList<EmojiFragment>? = null
+    var emoji_text: EmojiAppCompatTextView?= null
+    var emoji_edit_text: EmojiAppCompatEditText?= null
+    var icons: IntArray? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,17 +29,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupViewPager()
 
-       /* var emoji_text = findViewById<EmojiAppCompatTextView>(R.id.emoji_text)
+        emoji_text = findViewById<EmojiAppCompatTextView>(R.id.emoji_text)
+        emoji_edit_text = findViewById<EmojiAppCompatEditText>(R.id.emoji_edit_text)
 
-        var sb: StringBuffer? = null
-        sb?.append(Character.toChars(127467))
-        sb?.append(Character.toChars(127467))
-
-
-        val codepoints = intArrayOf(0x1F1EB, 0x1F1F7)
-        val s = String(codepoints, 0, codepoints.size)
-
-        emoji_text.text = s.toString()*/
     }
 
     private fun setupViewPager() {
@@ -52,6 +48,23 @@ class MainActivity : AppCompatActivity() {
 
         val viewPager = findViewById<ViewPager>(R.id.container);
         viewPager.adapter = EmojiPagerAdapter(supportFragmentManager, fragmentList!!)
+
+        val tabs_main = findViewById<TabLayout>(R.id.tabs_main)
+        tabs_main.setupWithViewPager(viewPager)
+
+
+        icons = intArrayOf(R.drawable.ic_emoji_people_light,
+                R.drawable.ic_emoji_nature_light,
+                R.drawable.ic_emoji_people_light,
+                R.drawable.ic_emoji_people_light,
+                R.drawable.ic_emoji_objects_light,
+                R.drawable.ic_emoji_symbols_light,
+                R.drawable.ic_emoji_places_light,
+                R.drawable.ic_emoji_people_light)
+
+        for (i in 0 until tabs_main.getTabCount()) {
+            tabs_main.getTabAt(i)!!.setIcon(icons!![i])
+        }
 
     }
 
@@ -78,30 +91,17 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     override fun onFailed(throwable: Throwable?) {
-                        Log.e("", "EmojiCompat initialization failed", throwable)
+                        Log.e("", "initialization failed", throwable)
                     }
                 })
 
         EmojiCompat.init(config)
     }
 
-    private class InitCallback internal constructor(regularTextView: TextView) : EmojiCompat.InitCallback() {
-
-        private val mRegularTextViewRef: WeakReference<TextView>
-
-        init {
-            mRegularTextViewRef = WeakReference(regularTextView)
-        }
-
-        override fun onInitialized() {
-            val regularTextView = mRegularTextViewRef.get()
-            if (regularTextView != null) {
-                val compat = EmojiCompat.get()
-                val context = regularTextView.context
-//                regularTextView.text = compat.process(context.getString(R.string.emoji_text, EMOJI))
-            }
-        }
-
+    override fun onEmojiconClicked(emoji: String) {
+        var strText = emoji_text?.text
+        emoji_text?.text = "$strText$emoji"
+        emoji_edit_text?.setText("$strText$emoji")
     }
 
 }
