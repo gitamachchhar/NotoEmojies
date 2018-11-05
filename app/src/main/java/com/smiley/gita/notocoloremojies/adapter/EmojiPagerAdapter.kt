@@ -15,6 +15,10 @@ class EmojiPagerAdapter(fragmentManager: FragmentManager, private val emojiFragm
         return emojiFragmentList.size
     }
 
+    fun getCurrentFragment(): Fragment {
+        return emojiFragmentList[0]
+    }
+
     override fun getPageTitle(position: Int): CharSequence? {
         return null
     }

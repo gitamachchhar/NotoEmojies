@@ -15,6 +15,7 @@ class EmojiFragment : Fragment(), AdapterView.OnItemClickListener {
 
     private var emojiList: ArrayList<String>? = null
     private var mOnEmojiconClickedListener: OnEmojiconClickedListener? = null
+    private var emojiAdapter: EmojiAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -24,7 +25,8 @@ class EmojiFragment : Fragment(), AdapterView.OnItemClickListener {
         emojiList = args?.getStringArrayList("data")
 
         val gridView = view.findViewById<GridView>(R.id.grid_emoji)
-        gridView.adapter = EmojiAdapter(emojiList, activity)
+        emojiAdapter = EmojiAdapter(emojiList, activity)
+        gridView.adapter = emojiAdapter
         gridView.onItemClickListener = this
         return view
     }
@@ -55,6 +57,11 @@ class EmojiFragment : Fragment(), AdapterView.OnItemClickListener {
 
     override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         mOnEmojiconClickedListener?.onEmojiconClicked(emojiList!![position])
+    }
+
+    fun setNewEmoji(emoji: ArrayList<String>) {
+        emojiAdapter?.addEmojis(emoji)
+
     }
 
 }

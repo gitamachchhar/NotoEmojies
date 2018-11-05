@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity(), EmojiFragment.OnEmojiconClickedListene
     private var icons: IntArray? = null
     private var mRecentEmojiList: ArrayList<String> = ArrayList()
     private var viewPager: ViewPager? = null
+    private var emojiAdapter: EmojiPagerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +43,6 @@ class MainActivity : AppCompatActivity(), EmojiFragment.OnEmojiconClickedListene
 
         mRecentEmojiList = ArrayList(Utils.getRecentEmojis(this))
 
-        Log.e("System out", "Size "+mRecentEmojiList.size)
-
         if (mRecentEmojiList.size > 0) {
             fragmentList?.add(EmojiFragment().newInstance(mRecentEmojiList, getString(R.string.recent)))
         }
@@ -58,7 +57,8 @@ class MainActivity : AppCompatActivity(), EmojiFragment.OnEmojiconClickedListene
         fragmentList?.add(EmojiFragment().newInstance(Flags.getFlagSmiley()!!, getString(R.string.flags)))
 
         viewPager = findViewById<ViewPager>(R.id.container)
-        viewPager?.adapter = EmojiPagerAdapter(supportFragmentManager, fragmentList!!)
+        emojiAdapter = EmojiPagerAdapter(supportFragmentManager, fragmentList!!)
+        viewPager?.adapter = emojiAdapter
 
         val mTblMain = findViewById<TabLayout>(R.id.tabs_main)
         mTblMain.setupWithViewPager(viewPager)
@@ -143,20 +143,19 @@ class MainActivity : AppCompatActivity(), EmojiFragment.OnEmojiconClickedListene
     }
 
     override fun onPageScrollStateChanged(p0: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onPageSelected(p0: Int) {
-
         if(p0 == 0) {
+            if (mRecentEmojiList.size > 0) {
+                (emojiAdapter?.getCurrentFragment() as EmojiFragment).setNewEmoji(ArrayList(Utils.getRecentEmojis(this)))
 
+            }
         }
-
     }
-
-
 }

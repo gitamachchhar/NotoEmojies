@@ -10,15 +10,22 @@ import kotlinx.android.synthetic.main.emoji_holder.view.*
 
 class EmojiAdapter(val items: ArrayList<String>?, val context: FragmentActivity?): BaseAdapter() {
 
+    var emoji: ArrayList<String>? = items
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val v = LayoutInflater.from(context).inflate(R.layout.emoji_holder, parent, false)
         val tvEmojiView = v.emoji_text_view
-        tvEmojiView.text = items?.get(position)
+        tvEmojiView.text = emoji?.get(position)
         return v;
     }
 
+    fun addEmojis(item: ArrayList<String>?){
+        emoji = item
+        notifyDataSetChanged()
+    }
+
     override fun getItem(position: Int): Any {
-        return items!!.get(position)
+        return emoji!!.get(position)
     }
 
     override fun getItemId(position: Int): Long {
@@ -26,7 +33,7 @@ class EmojiAdapter(val items: ArrayList<String>?, val context: FragmentActivity?
     }
 
     override fun getCount(): Int {
-      return items!!.size
+      return emoji!!.size
     }
 
 }
