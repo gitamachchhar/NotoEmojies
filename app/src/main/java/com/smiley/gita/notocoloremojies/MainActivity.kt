@@ -6,11 +6,11 @@ import android.support.text.emoji.EmojiCompat
 import android.support.text.emoji.FontRequestEmojiCompatConfig
 import android.support.text.emoji.bundled.BundledEmojiCompatConfig
 import android.support.text.emoji.widget.EmojiAppCompatEditText
-import android.support.text.emoji.widget.EmojiAppCompatTextView
 import android.support.v4.provider.FontRequest
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.example.android.emojicompat.CustomTextView
 import com.smiley.gita.notocoloremojies.adapter.EmojiPagerAdapter
 import com.smiley.gita.notocoloremojies.emojies.*
 import com.smiley.gita.notocoloremojies.fragments.EmojiFragment
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), EmojiFragment.OnEmojiconClickedListene
 
     private val USEBUNDLEDEMOJI = true
     private var fragmentList: ArrayList<EmojiFragment>? = null
-    private var mTvEmojiText: EmojiAppCompatTextView?= null
+    private var mTvEmojiText: CustomTextView?= null
     private var mEdEmojiEdit: EmojiAppCompatEditText?= null
     private var icons: IntArray? = null
     private var mRecentEmojiList: ArrayList<String> = ArrayList()
@@ -154,7 +154,6 @@ class MainActivity : AppCompatActivity(), EmojiFragment.OnEmojiconClickedListene
         if(p0 == 0) {
             if (mRecentEmojiList.size > 0) {
                 (emojiAdapter?.getCurrentFragment() as EmojiFragment).setNewEmoji(ArrayList(Utils.getRecentEmojis(this)))
-
             }
         }
     }

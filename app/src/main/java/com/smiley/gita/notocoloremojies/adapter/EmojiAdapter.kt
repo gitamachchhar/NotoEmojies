@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import com.smiley.gita.notocoloremojies.R
 import kotlinx.android.synthetic.main.emoji_holder.view.*
 
-class EmojiAdapter(val items: ArrayList<String>?, val context: FragmentActivity?): BaseAdapter() {
+class EmojiAdapter(items: ArrayList<String>?, val context: FragmentActivity?): BaseAdapter() {
 
     var emoji: ArrayList<String>? = items
 

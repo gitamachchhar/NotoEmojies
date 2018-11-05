@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <android.support.text.emoji.widget.EmojiAppCompatTextView
+    <com.example.android.emojicompat.CustomTextView
         android:id="@+id/emoji_text"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
-        android:textSize="12sp" />
+        android:textSize="18sp" />
 
     <android.support.text.emoji.widget.EmojiAppCompatEditText
         android:id="@+id/emoji_edit_text"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/tabs_main"
         android:layout_marginBottom="5dp"
-        android:textSize="12sp" />
+        android:textSize="18sp" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs_main"
@@ -33,6 +33,6 @@
         android:id="@+id/container"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="200dp"/>
 
 </RelativeLayout>
