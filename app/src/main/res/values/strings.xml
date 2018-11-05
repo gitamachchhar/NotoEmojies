@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">NotoColorEmojies</string>
+
+    <string name="activity">activity</string>
+    <string name="animal">animal</string>
+    <string name="flags">flags</string>
+    <string name="food">food</string>
+    <string name="objects">objects</string>
+    <string name="smiley">smiley</string>
+    <string name="symbol">symbol</string>
+    <string name="travel">travel</string>
+    <string name="recent">recent</string>
+
 </resources>
